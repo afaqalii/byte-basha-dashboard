@@ -11,7 +11,7 @@ const Sidebar = () => {
   const { uiState, toggleSidebar } = useAppContext();
   const pathname = usePathname()
   return (
-    <aside className={`hidden text-white bg-black md:block absolute top-0 min-h-screen h-full md:relative transition-all duration-300 ${uiState.isSidebarOpen ? 'left-0 w-full md:min-w-[300px] max-w-[300px]' : '-left-full max-w-0'} shadow-xl`}>
+    <aside className={`hidden text-white bg-black md:block absolute top-0 min-h-screen h-full md:relative transition-all duration-300 ${uiState.isSidebarOpen ? 'left-0 w-full md:min-w-[300px] max-w-[300px]' : '-left-full max-w-0'}`}>
       <RxCross1 onClick={toggleSidebar} className="md:hidden" />
       <div className="flex items-center w-full bg-white">
         <Image src={logo} width="80" height="80" alt="Byte Basha Logo" />

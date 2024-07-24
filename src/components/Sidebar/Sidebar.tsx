@@ -19,7 +19,7 @@ const Sidebar = () => {
       </div>
       <ul className="mt-10 px-5">
         {MenuItems.map((item) => (
-          <Link href={item.href}>
+          <Link key={item.text} href={item.href}>
             <li className={`flex items-center gap-3 rounded-md text-xl py-3 pl-5 mb-2 ${pathname === item.href ? 'bg-white text-black font-bold' : ''}`}>
               {<item.icon className="text-2xl" />}
               {item.text}

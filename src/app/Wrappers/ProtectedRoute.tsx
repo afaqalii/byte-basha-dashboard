@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
         // Show a loader while checking authentication status
         return (
             <div className="flex flex-col gap-5 items-center justify-center min-h-screen">
-                <h1>Your are not authorized...</h1>
+                <h1 className="text-2xl font-semibold">Your are not authorized</h1>
                 <Button
                     onClick={() => signIn("google")}
                 >

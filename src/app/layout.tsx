@@ -4,6 +4,8 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Navbar from "@/components/Navbar/Navbar";
 import { AppProvider } from "./context/AppContext";
+import SessionWrapper from "./Wrappers/SessionWrapper";
+import ProtectedRoute from "./Wrappers/ProtectedRoute";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,17 +21,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <SessionWrapper>
         <AppProvider>
-          <section className="flex min-h-screen">
-            <Sidebar />
-            <main className="flex flex-col w-full">
-              <Navbar />
-              {children}
-            </main>
-          </section>
+          <body className={inter.className}>
+            <ProtectedRoute>
+              <section className="flex min-h-screen">
+                <Sidebar />
+                <main className="flex flex-col w-full">
+                  <Navbar />
+                  {children}
+                </main>
+              </section>
+            </ProtectedRoute>
+          </body>
         </AppProvider>
-      </body>
+      </SessionWrapper>
     </html>
   );
 }

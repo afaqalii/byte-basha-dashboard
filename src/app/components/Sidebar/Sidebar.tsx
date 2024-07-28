@@ -1,11 +1,11 @@
 'use client'
 import { useAppContext } from "@/app/context/AppContext";
-import { MenuItems } from "@/lib/data";
+import { MenuItems } from "@/app/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { RxCross1 } from "react-icons/rx";
-import logo from "../../../public/logo.jpg"
+import logo from "../../../../public/logo.jpg"
 
 const Sidebar = () => {
   const { uiState, toggleSidebar } = useAppContext();

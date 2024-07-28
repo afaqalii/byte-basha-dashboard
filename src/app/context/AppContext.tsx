@@ -1,5 +1,5 @@
 'use client'
-import { UIState } from '@/lib/interfaces';
+import { UIState } from '@/app/lib/interfaces';
 import { createContext, useState, useContext, ReactNode } from 'react';
 
 interface AppContextProps {

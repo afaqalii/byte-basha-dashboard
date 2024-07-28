@@ -2,32 +2,32 @@ import { MdDashboard, MdCode, MdDesignServices, MdTrackChanges, MdSchool, MdPers
 export const MenuItems = [
     {
         text: "Dashboard",
-        href: "/",
+        href: "/dashboard",
         icon: MdDashboard,
     },
     {
         text: "Projects",
-        href: "/projects",
+        href: "/dashboard/projects",
         icon: MdCode,
     },
     {
         text: "Services",
-        href: "/services",
+        href: "/dashboard/services",
         icon: MdDesignServices
     },
     {
         text: "Training",
-        href: "/training",
+        href: "/dashboard/training",
         icon: MdTrackChanges
     },
     {
         text: "Internships",
-        href: "/internships",
+        href: "/dashboard/internships",
         icon: MdSchool,
     },
     {
         text: "Workspaces",
-        href: "/workspaces",
+        href: "/dashboard/workspaces",
         icon: MdPersonOutline
     },
 ]

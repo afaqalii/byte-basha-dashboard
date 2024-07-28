@@ -1,6 +1,7 @@
+'use client'
 import { useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -53,7 +54,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
+            className="w-full bg-black text-white py-2 rounded hover:bg-black/90"
           >
             Login
           </button>

@@ -1,14 +1,21 @@
 'use client'
-import { signOut } from "next-auth/react";
 import { useAppContext } from "@/app/context/AppContext"
 import { MdMenu } from "react-icons/md";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
+
 const Navbar = () => {
   const { toggleSidebar } = useAppContext()
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Remove the token
+    router.push('/login'); // Redirect to login page
+  };
   return (
     <nav className="flex items-center justify-between shadow-xl bg-white h-[80px] px-5">
       <MdMenu className="text-3xl cursor-pointer" onClick={toggleSidebar} />
-      <Button onClick={() => signOut()}>Logout</Button>
+      <Button onClick={() => handleLogout()}>Logout</Button>
     </nav>
   )
 }

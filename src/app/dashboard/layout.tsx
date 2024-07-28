@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
-import Sidebar from "@/app/components/Sidebar/Sidebar";
-import Navbar from "@/app/components/Navbar/Navbar";
 import { AppProvider } from "../context/AppContext";
 import SessionWrapper from "./Wrappers/SessionWrapper";
 import ProtectedRoute from "./Wrappers/ProtectedRoute";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import Navbar from "@/components/Navbar/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +29,9 @@ export default function RootLayout({
                 <Sidebar />
                 <main className="flex flex-col w-full">
                   <Navbar />
-                  {children}
+                  <div className="p-5">
+                    {children}
+                  </div>
                 </main>
               </section>
             </ProtectedRoute>

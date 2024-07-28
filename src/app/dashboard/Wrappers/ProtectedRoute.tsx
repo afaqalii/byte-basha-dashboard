@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/app/components/ui/button";
-import Spinner from "@/app/components/ui/loader/loader";
+import Spinner from "@/components/ui/loader/loader";
+import { Button } from "@/components/ui/button";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     const router = useRouter();

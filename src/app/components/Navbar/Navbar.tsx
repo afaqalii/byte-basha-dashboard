@@ -1,8 +1,8 @@
 'use client'
-import { useAppContext } from "@/app/context/AppContext"
 import { MdMenu } from "react-icons/md";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "@/context/AppContext";
 
 const Navbar = () => {
   const { toggleSidebar } = useAppContext()

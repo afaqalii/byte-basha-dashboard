@@ -3,10 +3,11 @@ export interface UIState {
 }
 
 export interface ProjectCardProps {
-  url: string;
+  id: string;
   title: string;
-  text: string;
-  category: string;
   index: number;
+  url: string;
+  text: string;
   technologies: string[];
+  category: string;
 }

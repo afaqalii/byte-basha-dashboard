@@ -6,6 +6,9 @@ import SessionWrapper from "./Wrappers/SessionWrapper";
 import ProtectedRoute from "./Wrappers/ProtectedRoute";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Navbar from "@/components/Navbar/Navbar";
+import { Provider } from "react-redux";
+import store from "@/redux/store";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,23 +24,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <SessionWrapper>
-        <AppProvider>
-          <body className={inter.className}>
-            <ProtectedRoute>
-              <section className="flex min-h-screen">
-                <Sidebar />
-                <main className="flex flex-col w-full">
-                  <Navbar />
-                  <div className="p-5">
-                    {children}
-                  </div>
-                </main>
-              </section>
-            </ProtectedRoute>
-          </body>
-        </AppProvider>
-      </SessionWrapper>
+      <Provider store={store}>
+        <SessionWrapper>
+          <AppProvider>
+            <body className={inter.className}>
+              <ProtectedRoute>
+                <section className="flex min-h-screen">
+                  <Sidebar />
+                  <main className="flex flex-col w-full">
+                    <Navbar />
+                    <div className="container p-5">
+                      {children}
+                    </div>
+                  </main>
+                </section>
+              </ProtectedRoute>
+            </body>
+          </AppProvider>
+        </SessionWrapper>
+      </Provider> 
     </html>
   );
 }

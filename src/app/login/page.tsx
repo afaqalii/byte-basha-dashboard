@@ -2,15 +2,17 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import Spinner from '../components/ui/loader/loader';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await axios.post('/api/auth/login', {
         email,
@@ -21,9 +23,11 @@ const Login = () => {
         // Save token to localStorage or cookies
         localStorage.setItem('token', response.data.token);
         router.push('/dashboard');
+        setLoading(false)
       }
     } catch (error) {
       console.error('Login failed:', error);
+      setLoading(false)
     }
   };
 
@@ -54,9 +58,11 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-black text-white py-2 rounded hover:bg-black/90"
+            className="relative w-full bg-black text-white py-2 rounded hover:bg-black/90"
           >
-            Login
+            {
+              loading ? <Spinner /> : <>Login</>
+            }
           </button>
         </form>
       </div>

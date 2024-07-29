@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import { useState } from 'react';
 import Image from 'next/image';
 import { MdDelete } from "react-icons/md";
@@ -6,7 +6,7 @@ import { MdEdit } from "react-icons/md";
 import { ProjectCardProps } from '@/lib/interfaces'; 
 
 
-const ProjectCard =  ({ id, title, index, url, text, technologies, category }: ProjectCardProps) => {
+const ProjectCard =  ({ id, title, url, text, technologies, category }: ProjectCardProps) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const toggleReadMore = () => {

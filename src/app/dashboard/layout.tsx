@@ -24,7 +24,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Provider store={store}>
         <SessionWrapper>
           <AppProvider>
             <body className={inter.className}>
@@ -42,7 +41,6 @@ export default function RootLayout({
             </body>
           </AppProvider>
         </SessionWrapper>
-      </Provider> 
     </html>
   );
 }

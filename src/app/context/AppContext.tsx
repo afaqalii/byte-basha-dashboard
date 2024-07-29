@@ -1,6 +1,8 @@
 'use client'
-import { UIState } from '@/app/lib/interfaces';
+import { UIState } from '@/lib/interfaces';
+import store from '@/redux/store';
 import { createContext, useState, useContext, ReactNode } from 'react';
+import { Provider } from 'react-redux';
 
 interface AppContextProps {
     uiState: UIState;
@@ -26,9 +28,11 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     };
 
     return (
-        <AppContext.Provider value={{ uiState, toggleSidebar }}>
-            {children}
-        </AppContext.Provider>
+        <Provider store={store}>
+            <AppContext.Provider value={{ uiState, toggleSidebar }}>
+                {children}
+            </AppContext.Provider>
+        </Provider>
     );
 };
 

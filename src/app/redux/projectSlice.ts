@@ -1,78 +1,60 @@
-// slices/projectSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { ref, set, get, remove, update } from 'firebase/database';
+import { ref, set, get, update } from 'firebase/database';
+import { ProjectCardProps } from '@/lib/interfaces';
 import { database } from '../../../firebase';
 
-interface Project {
-  id: string;
-  title: string;
-  url: string;
-  text: string;
-  technologies: string[];
-  category: string;
-}
-
 interface ProjectsState {
-  projects: Project[];
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  projects: ProjectCardProps[];
+  loading: boolean;
   error: string | null;
 }
 
 const initialState: ProjectsState = {
   projects: [],
-  status: 'idle',
+  loading: false,
   error: null,
 };
 
-// Async thunks for Firebase operations
-export const fetchProjects = createAsyncThunk('projects/fetchProjects', async () => {
-  const snapshot = await get(ref(database, 'projects/'));
-  const projects = snapshot.val();
-  return Object.keys(projects).map(key => ({ id: key, ...projects[key] }));
+export const listProjects = createAsyncThunk<ProjectCardProps[]>('projects/listProjects', async () => {
+  const snapshot = await get(ref(database, 'projects'));
+  const projects: Record<string, ProjectCardProps> = snapshot.val() || {};
+  return Object.values(projects);
 });
 
-export const addProject = createAsyncThunk('projects/addProject', async (project: Project) => {
-  const newProjectRef = ref(database, `projects/${project.id}`);
-  await set(newProjectRef, project);
+export const addProject = createAsyncThunk<ProjectCardProps, ProjectCardProps>('projects/addProject', async (project) => {
+  const projectRef = ref(database, `projects/${project.id}`);
+  await set(projectRef, project);
   return project;
 });
 
-export const deleteProject = createAsyncThunk('projects/deleteProject', async (projectId: string) => {
-  await remove(ref(database, `projects/${projectId}`));
-  return projectId;
-});
-
-export const updateProject = createAsyncThunk('projects/updateProject', async (project: Project) => {
+export const updateProject = createAsyncThunk<ProjectCardProps, ProjectCardProps>('projects/updateProject', async (project) => {
   const projectRef = ref(database, `projects/${project.id}`);
   await update(projectRef, project);
   return project;
 });
 
-const projectSlice = createSlice({
+const projectsSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-      .addCase(fetchProjects.pending, (state) => {
-        state.status = 'loading';
+      .addCase(listProjects.pending, state => {
+        state.loading = true;
       })
-      .addCase(fetchProjects.fulfilled, (state, action: PayloadAction<Project[]>) => {
-        state.status = 'succeeded';
+      .addCase(listProjects.fulfilled, (state, action: PayloadAction<ProjectCardProps[]>) => {
+        state.loading = false;
         state.projects = action.payload;
       })
-      .addCase(fetchProjects.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message ?? 'Failed to fetch projects';
+      .addCase(listProjects.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Failed to load projects';
       })
-      .addCase(addProject.fulfilled, (state, action: PayloadAction<Project>) => {
+      .addCase(addProject.fulfilled, (state, action: PayloadAction<ProjectCardProps>) => {
         state.projects.push(action.payload);
       })
-      .addCase(deleteProject.fulfilled, (state, action: PayloadAction<string>) => {
-        state.projects = state.projects.filter(project => project.id !== action.payload);
-      })
-      .addCase(updateProject.fulfilled, (state, action: PayloadAction<Project>) => {
-        const index = state.projects.findIndex(project => project.id === action.payload.id);
+      .addCase(updateProject.fulfilled, (state, action: PayloadAction<ProjectCardProps>) => {
+        const index = state.projects.findIndex(p => p.id === action.payload.id);
         if (index !== -1) {
           state.projects[index] = action.payload;
         }
@@ -80,4 +62,4 @@ const projectSlice = createSlice({
   },
 });
 
-export default projectSlice.reducer;
+export default projectsSlice.reducer;

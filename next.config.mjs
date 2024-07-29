@@ -9,7 +9,8 @@ const nextConfig = {
             'images.pexels.com',
             'th.bing.com',
             'assets.website-files.com',
-            'img.launchberg.com'
+            'img.launchberg.com',
+            'firebasestorage.googleapis.com'
         ],
     },
 };

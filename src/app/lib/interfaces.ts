@@ -5,7 +5,6 @@ export interface UIState {
 export interface ProjectCardProps {
   id: string;
   title: string;
-  index: number;
   url: string;
   text: string;
   technologies: string[];

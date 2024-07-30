@@ -1,13 +1,13 @@
 'use client'
 import { useDispatch } from 'react-redux';
-import { deleteProject, setEditMode, setForm, } from '@/redux/projectSlice';
-import { ProjectCardProps } from '@/lib/interfaces';
+import { deleteInternship, setEditMode, setForm, } from '@/redux/internshipSlice';
+import { InternshipCardProps } from '@/lib/interfaces';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import Image from 'next/image';
 import { useState } from 'react';
 import { AppDispatch } from '@/redux/store';
 
-const ProjectCard = ({ id, title, file, text, technologies, category, handleOpen }: ProjectCardProps) => {
+const InternshipCard = ({ id, title, file, text, handleOpen }: InternshipCardProps) => {
     const dispatch = useDispatch<AppDispatch>();
     const [isExpanded, setIsExpanded] = useState(false);
 
@@ -16,7 +16,7 @@ const ProjectCard = ({ id, title, file, text, technologies, category, handleOpen
     };
 
     const handleDelete = () => {
-        dispatch(deleteProject(id));
+        dispatch(deleteInternship(id));
     };
     const handleEdit = () => {
         dispatch(setEditMode(true))
@@ -25,9 +25,6 @@ const ProjectCard = ({ id, title, file, text, technologies, category, handleOpen
             title,
             file,
             text,
-            category,
-            technologies,
-            technology: "",
         }));
         if (handleOpen) {
             handleOpen()
@@ -56,22 +53,12 @@ const ProjectCard = ({ id, title, file, text, technologies, category, handleOpen
                 <p className={`text-gray-400 text-xs ${isExpanded ? '' : 'line-clamp-3'}`}>
                     {text}
                 </p>
-                <p className='text-gray-400 text-xs mt-2'>
-                    Category: <span className='text-black font-semibold uppercase'>{category}</span>
-                </p>
                 <button className="text-yellowDark text-sm mt-2" onClick={toggleReadMore}>
                     {isExpanded ? 'Read Less' : 'Read More'}
                 </button>
-                <div className="flex flex-wrap gap-3 my-3">
-                    {technologies?.map((badge) => (
-                        <span key={badge} className="py-1 px-3 min-w-10 text-center uppercase text-xs text-yellowDark rounded-full border border-yellowDark">
-                            {badge}
-                        </span>
-                    ))}
-                </div>
             </div>
         </div>
     );
 };
 
-export default ProjectCard;
+export default InternshipCard;

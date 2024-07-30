@@ -17,7 +17,7 @@ interface AppProviderProps {
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [uiState, setUIState] = useState<UIState>({
-        isSidebarOpen: false,
+        isSidebarOpen: window.innerWidth < 768 ? false : true,
     });
 
     const toggleSidebar = () => {

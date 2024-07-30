@@ -1,13 +1,7 @@
 export interface UIState {
   isSidebarOpen: boolean;
 }
-
-export interface ProjectCardProps extends TrainingCardProps {
-  technologies: string[];
-  category: string;
-}
-export interface InternshipCardProps extends TrainingCardProps{};
-export interface TrainingCardProps {
+export interface CardProps {
   id: string;
   title: string;
   file: File | string;
@@ -15,15 +9,28 @@ export interface TrainingCardProps {
   handleOpen?: () => void;
 }
 
-export interface FormState {
-  id?: string,
-  title: string;
-  file: File | null | string;
-  text: string;
+export interface ProjectCardProps extends CardProps {
+  technologies: string[];
+  category: string;
+}
+export interface InternshipCardProps extends CardProps { };
+export interface WorkspaceCardProps extends CardProps { };
+export interface TrainingCardProps extends CardProps { };
+
+export interface form {
+  id: string,
+  title: string,
+  text: string,
+  file: File | string | null;
+}
+
+export interface FormState extends form {
   category: string;
   technology: string;
   technologies: string[];
 }
+
+
 
 export interface ProjectsState {
   projects: ProjectCardProps[];

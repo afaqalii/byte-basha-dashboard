@@ -1,7 +1,9 @@
-const page = () => {
+const Services = () => {
   return (
-    <div>page</div>
+    <h1 className="text-xl font-semibold">
+      Services section left static
+    </h1>
   )
 }
 
-export default page
+export default Services

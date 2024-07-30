@@ -1,23 +1,16 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { FormState, TrainingCardProps } from '@/lib/interfaces';
+import { form, FormState, TrainingCardProps } from '@/lib/interfaces';
 import { addData, deleteData, listData, updateData } from '@/firebaseAPI';
 
 
 const trainingsPath = 'training';
 
-interface trainingForm {
-    id: string | null,
-    title: string,
-    text: string,
-    file: File | string | null;
-}
-
 interface trainingState {
-    training: trainingForm[]
+    training: form[]
     loading: boolean,
     error: string | null,
     isEditMode: boolean,
-    form: trainingForm
+    form: form
 }
 
 const initialState: trainingState = {

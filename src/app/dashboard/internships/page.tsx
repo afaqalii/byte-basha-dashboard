@@ -7,7 +7,7 @@ import { AppDispatch } from "@/redux/store"
 import { resetForm, setEditMode } from "@/redux/internshipSlice"
 import InternshipListing from "./InternshipListing"
 
-const internship = () => {
+const Internship = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleOpen = () => setIsOpen(true);
@@ -29,4 +29,4 @@ const internship = () => {
   )
 }
 
-export default internship
+export default Internship

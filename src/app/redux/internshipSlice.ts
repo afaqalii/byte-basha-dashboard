@@ -1,23 +1,16 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { FormState, TrainingCardProps } from '@/lib/interfaces';
+import { form, TrainingCardProps } from '@/lib/interfaces';
 import { addData, deleteData, listData, updateData } from '@/firebaseAPI';
 
 
 const internshipPath = 'internship';
 
-interface internshipForm {
-    id: string | null,
-    title: string,
-    text: string,
-    file: File | string | null;
-}
-
 interface trainingState {
-    internship: internshipForm[]
+    internship: form[]
     loading: boolean,
     error: string | null,
     isEditMode: boolean,
-    form: internshipForm
+    form: form
 }
 
 const initialState: trainingState = {
@@ -53,13 +46,13 @@ const trainingSlice = createSlice({
     name: 'internship',
     initialState,
     reducers: {
-        setField: (state, action: PayloadAction<{ field: keyof FormState; value: FormState[keyof FormState] }>) => {
+        setField: (state, action) => {
             state.form[action.payload.field] = action.payload.value;
         },
         resetForm: (state) => {
             state.form = initialState.form;
         },
-        setForm: (state, action: PayloadAction<internshipForm>) => {
+        setForm: (state, action: PayloadAction<form>) => {
             state.form = action.payload;
         },
         setEditMode: (state, action: PayloadAction<boolean>) => {

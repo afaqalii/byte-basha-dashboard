@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/redux/store"
 import { resetForm, setEditMode } from "@/redux/projectSlice"
 
-const project = () => {
+const Project = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleOpen = () => setIsOpen(true);
@@ -29,4 +29,4 @@ const project = () => {
   )
 }
 
-export default project
+export default Project

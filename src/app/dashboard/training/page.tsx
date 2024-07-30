@@ -7,7 +7,7 @@ import { AppDispatch } from "@/redux/store"
 import { resetForm, setEditMode } from "@/redux/traningSlice"
 import TrainingListing from "./TrainingListing"
 
-const training = () => {
+const Training = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleOpen = () => setIsOpen(true);
@@ -29,4 +29,4 @@ const training = () => {
   )
 }
 
-export default training
+export default Training

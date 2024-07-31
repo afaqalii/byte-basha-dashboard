@@ -34,7 +34,7 @@ const ProjectListing = ({ handleOpen, handleClose }: ProjectListingProps) => {
                             id={card.id.toString()}
                             title={card.title}
                             category={card.category}
-                            file={card.file}
+                            file={card.file || ""}
                             text={card.text}
                             technologies={card.technologies}
                         />

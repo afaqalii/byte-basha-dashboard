@@ -33,7 +33,7 @@ const TrainingListing = ({ handleOpen, handleClose }: TrainingListingProps) => {
                             key={card.id}
                             id={card.id.toString()}
                             title={card.title}
-                            file={card.file}
+                            file={card.file || ""}
                             text={card.text}
                         />
                     )) :

@@ -30,8 +30,6 @@ export interface FormState extends form {
   technologies: string[];
 }
 
-
-
 export interface ProjectsState {
   projects: ProjectCardProps[];
   loading: boolean;

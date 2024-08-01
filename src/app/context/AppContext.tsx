@@ -1,7 +1,8 @@
 'use client'
+
 import { UIState } from '@/lib/interfaces';
 import store from '@/redux/store';
-import { createContext, useState, useContext, ReactNode } from 'react';
+import { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { Provider } from 'react-redux';
 
 interface AppContextProps {
@@ -17,8 +18,27 @@ interface AppProviderProps {
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     const [uiState, setUIState] = useState<UIState>({
-        isSidebarOpen: window.innerWidth < 768 ? false : true,
+        isSidebarOpen: true, // Initial state that does not rely on window
     });
+
+    useEffect(() => {
+        const handleResize = () => {
+            setUIState({
+                isSidebarOpen: window.innerWidth >= 768,
+            });
+        };
+
+        // Set initial state based on window width
+        handleResize();
+
+        // Add event listener for window resize
+        window.addEventListener('resize', handleResize);
+
+        // Clean up event listener on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     const toggleSidebar = () => {
         setUIState((prevState) => ({

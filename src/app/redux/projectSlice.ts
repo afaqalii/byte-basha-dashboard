@@ -51,7 +51,7 @@ const projectsSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
-    setField: (state, action: PayloadAction<{ field: keyof form, value: any }>) => {
+    setField: (state, action: PayloadAction<{ field: keyof FormState, value: any }>) => {
       state.form[action.payload.field] = action.payload.value;
   },
     addTechnology: (state) => {

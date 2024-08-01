@@ -26,11 +26,16 @@ const Login = () => {
         // Save token to localStorage or cookies
         localStorage.setItem('token', response.data.token);
         router.push('/dashboard');
-      } 
+      }
     } catch (error) {
-      setError('Login failed. Please check your email and password.');
-    }
-    finally {
+      if (axios.isAxiosError(error) && error.response) {
+        // Set the error message from the server response
+        setError(error.response.data.message || 'Login failed. Please check your email and password.');
+      } else {
+        setError('An unexpected error occurred. Please try again.');
+      }
+      console.error('Login failed:', error);
+    } finally {
       setLoading(false);
     }
   };

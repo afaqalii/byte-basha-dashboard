@@ -8,11 +8,14 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(''); // Reset the error message
+
     try {
       const response = await axios.post('/api/auth/login', {
         email,
@@ -23,11 +26,12 @@ const Login = () => {
         // Save token to localStorage or cookies
         localStorage.setItem('token', response.data.token);
         router.push('/dashboard');
-        setLoading(false)
-      }
+      } 
     } catch (error) {
-      console.error('Login failed:', error);
-      setLoading(false)
+      setError('Login failed. Please check your email and password.');
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -56,13 +60,17 @@ const Login = () => {
               required
             />
           </div>
+          {error && (
+            <div className="mb-4 text-red-600 text-center">
+              {error}
+            </div>
+          )}
           <button
             type="submit"
             className="relative w-full bg-black text-white py-2 rounded hover:bg-black/90"
+            disabled={loading}
           >
-            {
-              loading ? <Spinner /> : <>Login</>
-            }
+            {loading ? <Spinner /> : 'Login'}
           </button>
         </form>
       </div>

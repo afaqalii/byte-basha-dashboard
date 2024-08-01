@@ -46,7 +46,7 @@ const trainingSlice = createSlice({
     name: 'workspace',
     initialState,
     reducers: {
-        setField: (state, action: PayloadAction<{ field: keyof FormState; value: FormState[keyof FormState] }>) => {
+        setField: (state, action: PayloadAction<{ field: keyof form, value: any }>) => {
             state.form[action.payload.field] = action.payload.value;
         },
         resetForm: (state) => {

@@ -46,13 +46,13 @@ const trainingSlice = createSlice({
     name: 'training',
     initialState,
     reducers: {
-        setField: (state, action: PayloadAction<{ field: keyof FormState; value: FormState[keyof FormState] }>) => {
+        setField: (state, action: PayloadAction<{ field: keyof form, value: any }>) => {
             state.form[action.payload.field] = action.payload.value;
         },
         resetForm: (state) => {
             state.form = initialState.form;
         },
-        setForm: (state, action: PayloadAction<trainingForm>) => {
+        setForm: (state, action: PayloadAction<form>) => {
             state.form = action.payload;
         },
         setEditMode: (state, action: PayloadAction<boolean>) => {

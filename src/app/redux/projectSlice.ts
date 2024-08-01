@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { FormState, ProjectCardProps } from '@/lib/interfaces';
+import { form, FormState, ProjectCardProps } from '@/lib/interfaces';
 import { addData, deleteData, listData, updateData } from '@/firebaseAPI';
 
 
@@ -21,6 +21,7 @@ const initialState: ProjectsState = {
   error: null,
   isEditMode: false,
   form: {
+    id:'',
     title: '',
     file: null,
     text: '',
@@ -50,9 +51,9 @@ const projectsSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
-    setField: (state, action: PayloadAction<{ field: keyof FormState; value: FormState[keyof FormState] }>) => {
+    setField: (state, action: PayloadAction<{ field: keyof form, value: any }>) => {
       state.form[action.payload.field] = action.payload.value;
-    },
+  },
     addTechnology: (state) => {
       if (state.form.technology && !state.form.technologies.includes(state.form.technology)) {
         state.form.technologies.push(state.form.technology);
